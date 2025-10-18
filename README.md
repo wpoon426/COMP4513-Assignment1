@@ -4,7 +4,7 @@
 ## Overview
 This project is an API for querying F1 data - circuits, constructors, drivers, races and others. Some of the data in the dataset did not load in correctly, so there are some links where the return is empty or will say nothing was found. I will give alternate request for them. 
 
-![NodeJS](https://badgen.net/static/NodeJS/22.12.0/green) ![Express](https://badgen.net/static/Express/4.21.2/blue) ![Supabase](https://badgen.net/static/Supabase/2.75.1/red)
+![NodeJS](https://badgen.net/static/NodeJS/22.12.0/green) ![Express](https://badgen.net/static/Express/4.21.2/blue) ![Supabase](https://badgen.net/static/Supabase/2.75.1/red) ![Deployed on](https://badgen.net/static/Render/purple)
 
 
 # API functionality

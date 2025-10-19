@@ -6,8 +6,7 @@ const handleError = require('../handler/handleError');
 // Return all drivers
 router.get('/', async (req, res) => {
     try {
-        // Provide Supabase Query Builder Query
-        const { data, error } = await req.app.get('supabase') // Take the supabase instance in the request from f1-server.js
+        const { data, error } = await req.app.get('supabase') 
             .from('drivers')
             .select();
 
@@ -38,8 +37,8 @@ router.get('/:ref', async (req, res) => {
 // // returns the drivers whose surname begins with the provided substring
 router.get('/search/:string', async (req, res) => {
     try {
-        const string = req.params.string;// Provide Supabase Query Builder Query
-        const { data, error } = await req.app.get('supabase') // Take the supabase instance in the request from f1-server.js
+        const string = req.params.string;
+        const { data, error } = await req.app.get('supabase') 
             .from('drivers')
             .select()
             .ilike('surname', `${string}%`);
@@ -53,7 +52,7 @@ router.get('/search/:string', async (req, res) => {
     }
 });
 
-
+//Returns the drivers within a given raceID
 router.get('/race/:raceId', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')

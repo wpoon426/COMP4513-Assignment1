@@ -6,12 +6,10 @@ const handleError = require('../handler/handleError');
 // Return all specific races
 router.get('/:raceId', async (req, res) => {
     try {
-        // Provide Supabase Query Builder Query
-        const { data, error } = await req.app.get('supabase') // Take the supabase instance in the request from f1-server.js
+        const { data, error } = await req.app.get('supabase')
             .from('circuits')
             .select('name, location, country')
             .order('name', { ascending: true });
-
         res.send(data);
     } catch (err) {
         handleError(res, err, "Failed to get races");
@@ -27,8 +25,6 @@ router.get('/season/:year', async (req, res) => {
             `)
             .eq('year', req.params.year)
             .order('round', { ascending: true });
-
-
         if (data.length === 0) {  // Check for empty data array
             return res.status(404).json({ message: "Races not found." });
         }
@@ -73,6 +69,8 @@ router.get('/season/:year/:round', async (req, res) => {
     }
 });
 
+
+//Returns all the races for a given circuit
 router.get('/circuits/:circuitRef', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')
@@ -93,7 +91,12 @@ router.get('/circuits/:circuitRef', async (req, res) => {
             .eq('circuits.circuitRef', req.params.circuitRef)
             .order('year', { ascending: true });
 
-        
+            if (data.length === 0) {  // Check for empty data array
+                return res.status(404).json({ message: "Races not found." });
+            }
+
+
+
         res.send(data);
     } catch (err) {
         handleError(res, err, "Failed to get races");
@@ -103,7 +106,7 @@ router.get('/circuits/:circuitRef', async (req, res) => {
 
 
 
-
+//Returns all the races for a given circuit between two years
 router.get('/circuits/:circuitRef/season/:year1/:year2', async (req, res) => {
 
     try {
@@ -126,6 +129,11 @@ router.get('/circuits/:circuitRef/season/:year1/:year2', async (req, res) => {
             .gte('year', req.params.year1)
             .lte('year', req.params.year2)
             .order('year', { ascending: true });
+
+
+            if (data.length === 0) {  // Check for empty data array
+                return res.status(404).json({ message: "Races not found." });
+            }
 
 
         res.send(data);

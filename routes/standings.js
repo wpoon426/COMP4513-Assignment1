@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const handleError = require('../handler/handleError');
 
-
+//Returns the current season driver standings table for the specified race
 router.get('/drivers/:raceId', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')
@@ -32,7 +32,7 @@ router.get('/drivers/:raceId', async (req, res) => {
 });
 
 
-
+//Returns the current season constructors standings table for the specified race
 router.get('/constructors/:raceId', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')

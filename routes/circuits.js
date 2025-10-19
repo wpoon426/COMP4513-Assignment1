@@ -6,8 +6,7 @@ const handleError = require('../handler/handleError');
 // Return all circuits
 router.get('/', async (req, res) => {
     try {
-        // Provide Supabase Query Builder Query
-        const { data, error } = await req.app.get('supabase') // Take the supabase instance in the request from f1-server.js
+        const { data, error } = await req.app.get('supabase') 
             .from('circuits')
             .select();
 
@@ -35,7 +34,7 @@ router.get('/:ref', async (req, res) => {
     }
 });
 
-
+//Returns the circuits used in a given season
 router.get('/season/:year', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')

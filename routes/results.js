@@ -3,10 +3,10 @@ const router = express.Router();
 const handleError = require('../handler/handleError');
 
 
-
+//Returns the results for the specified race, provide the following fields: driver (driverRef, code, forename, surname), race (name, round, year, date), constructor (name, constructorRef, nationality).
+//Sort by the field grid in ascending order (1st place first, 2nd place second, etc).
 router.get('/:raceId', async (req, res) => {
     try {
-
         const { data, error } = await req.app.get('supabase')
             .from('results')
             .select(`
@@ -35,7 +35,7 @@ router.get('/:raceId', async (req, res) => {
 
 
             if (!data || data.length === 0) {
-                return res.status(404).json({ message: 'No results found for this driver' });
+                return res.status(404).json({ message: 'No results found for this race' });
             }
 
 
@@ -50,7 +50,7 @@ router.get('/:raceId', async (req, res) => {
     }
 });
 
-
+//Returns all the results for a given driver
 router.get('/driver/:ref', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')
@@ -101,7 +101,7 @@ router.get('/driver/:ref', async (req, res) => {
     }
 });
 
-
+//Returns all the results for a given driver between two years
 router.get('/drivers/:driverRef/seasons/:year1/:year2', async (req, res) => {
     try {
         const { data, error } = await req.app.get('supabase')
